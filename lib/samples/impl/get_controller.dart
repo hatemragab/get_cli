@@ -23,7 +23,8 @@ class ${_fileName.pascalCase}Controller extends GetxController {
 }
 ''';
   String get flutterController => '''import 'package:get/get.dart';
-
+import 'package:flutter/material.dart';
+import 'package:v_chat_utils/v_chat_utils.dart';
 class ${_fileName.pascalCase}Controller extends GetxController {
    final txtController = TextEditingController();
   VChatLoadingState loadingState = VChatLoadingState.ideal;

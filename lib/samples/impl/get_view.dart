@@ -34,7 +34,7 @@ class $_viewName extends $_controllerName {
       appBar: AppBar(
         title: const Text('$_viewName'),
       ),
-      body: GetBuilder<$_controllerName>(
+      body: GetBuilder<$_controller>(
         assignId: true,
         builder: (logic) {
           return VAsyncWidgetsBuilder(
