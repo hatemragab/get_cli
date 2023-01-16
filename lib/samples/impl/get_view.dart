@@ -22,6 +22,8 @@ class GetViewSample extends Sample {
 
   String get _flutterView => '''import 'package:flutter/material.dart';
 import 'package:get/get.dart'; 
+import 'package:super_up_core/super_up_core.dart';
+import 'package:v_chat_utils/v_chat_utils.dart';
 $import
 
 class $_viewName extends $_controllerName {
@@ -31,13 +33,29 @@ class $_viewName extends $_controllerName {
     return Scaffold(
       appBar: AppBar(
         title: const Text('$_viewName'),
-        centerTitle: true,
       ),
-      body:const Center(
-        child: Text(
-          '$_viewName is working', 
-          style: TextStyle(fontSize:20),
-        ),
+      body: GetBuilder<$_controllerName>(
+        assignId: true,
+        builder: (logic) {
+          return VAsyncWidgetsBuilder(
+            loadingState: logic.loadingState,
+            onRefresh: controller.getData,
+            loadingWidget: () => const SLoadingWidget(),
+            errorWidget: () => const SErrorWidget(),
+            emptyWidget: () => const SEmptyWidget(),
+            successWidget: () {
+              return ListView.builder(
+                itemBuilder: (context, index) {
+                  final item = logic.data[index];
+                  return ListTile(
+                    title: "test".text,
+                  );
+                },
+                itemCount: logic.data.length,
+              );
+            },
+          );
+        },
       ),
     );
   }
